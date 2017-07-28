@@ -6,6 +6,7 @@ let path = require('path')
 let expressValidator = require('express-validator')
 let expressSession = require('express-session')
 
+app.use(expressSession({secret: 'keyboard cat', saveUninitialized: true, resave: false}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -17,7 +18,6 @@ app.set('views', './views')
 app.set('view engine', 'mustache')
 
 app.use(express.static('public'))
-app.use(expressSession({secret: 'keyboard cat', saveUninitialized: true, resave: false}));
 
 app.listen(3000, function(){
   console.log("App running on port 3000")
