@@ -6,6 +6,9 @@ let path = require('path')
 let expressValidator = require('express-validator')
 let expressSession = require('express-session')
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 let mRoutes = require('./routes/mainRoutes')
 app.use('/', mRoutes)
 
@@ -14,15 +17,7 @@ app.set('views', './views')
 app.set('view engine', 'mustache')
 
 app.use(express.static('public'))
-
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-var sess = {
-  secret: 'keyboard cat',
-  cookie: {}
-}
+app.use(expressSession({secret: 'keyboard cat', saveUninitialized: true, resave: false}));
 
 app.listen(3000, function(){
   console.log("App running on port 3000")
