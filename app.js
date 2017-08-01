@@ -12,12 +12,15 @@ app.use(bodyParser.json())
 
 let mRoutes = require('./routes/mainRoutes')
 app.use('/', mRoutes)
+app.use('/user/:username', mRoutes)
 
 app.engine('mustache', mustacheExpress())
 app.set('views', './views')
 app.set('view engine', 'mustache')
 
 app.use(express.static('public'))
+
+
 
 app.listen(3000, function(){
   console.log("App running on port 3000")
